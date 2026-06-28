@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.button:hover {
+  border-color: var(--color-border-dark);
+}
+
+.current {
+  border-color: var(--color-button-primary);
+  background-color: var(--color-button-primary);
+  color: var(--color-text-unpainted);
+}
+
+@media (max-width: 640px) {
+  .container {
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    flex: 1 1 calc(50% - 6px);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
