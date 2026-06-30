@@ -49,11 +49,22 @@ export default function Article({ data }: Props) {
     },
   });
 
+  const thumbnail = data.thumbnail
+    ? {
+        src: data.thumbnail.url,
+        width: data.thumbnail.width,
+        height: data.thumbnail.height,
+      }
+    : {
+        src: "/YWD-LOGO-removebg.png",
+        width: 1200,
+        height: 630,
+      };
+
   return (
     <main>
       <h1 className={styles.title}>{data.title}</h1>
       <p className={styles.description}>{data.description}</p>
-
       <div className={styles.meta}>
         <Link
           href={`/news/category/${data.category.id}`}
@@ -64,16 +75,13 @@ export default function Article({ data }: Props) {
 
         <Date date={data.publishedAt || data.createdAt} />
       </div>
-
-      {data.thumbnail && (
-        <Image
-          src={data.thumbnail.url}
-          alt=""
-          className={styles.thumbnail}
-          width={data.thumbnail.width}
-          height={data.thumbnail.height}
-        />
-      )}
+      <Image
+        src={thumbnail.src}
+        alt=""
+        className={styles.thumbnail}
+        width={thumbnail.width}
+        height={thumbnail.height}
+      />{" "}
       <div
         className={styles.content}
         // dangerouslySetInnerHTML={{ __html: data.content }}

@@ -1,10 +1,11 @@
 // app/page.tsx
 import Image from "next/image";
-import styles from "./page.module.css";
 import { getNewsList } from "./_libs/microcms";
-import { TOP_NEWS_LIMIT } from "./constants";
+import { TOP_NEWS_LIMIT } from "./_constants";
 import NewsList from "./_components/NewsList";
 import ButtonLink from "./_components/ButtonLink";
+
+export const revalidate = 1;
 
 export default async function Home() {
   const data = await getNewsList({

@@ -1,18 +1,19 @@
-// app\news\category\[id]\page.tsx
+// app\news\category\[id]\p\[current]\page.tsx
+import { notFound } from "next/navigation";
 import {
   getCategoryDetail,
   getCategoryList,
   getNewsList,
 } from "@/app/_libs/microcms";
-import { notFound } from "next/navigation";
 import NewsList from "@/app/_components/NewsList";
+import Pagination from "@/app/_components/Pagination";
 import { NEWS_LIST_LIMIT } from "@/app/_constants";
 import CategoryFilter from "@/app/_components/CategoryFilter";
 import SearchField from "@/app/_components/SearchField";
-import Pagination from "@/app/_components/Pagination";
 
 type Props = {
   params: Promise<{
+    current: string;
     id: string;
   }>;
 };
@@ -20,25 +21,54 @@ type Props = {
 export const revalidate = 1;
 
 export async function generateStaticParams() {
-  const { contents } = await getCategoryList({
+  const { contents: categories } = await getCategoryList({
     fields: ["id"],
     limit: 100,
   });
 
-  return contents.map((category) => ({
-    id: category.id,
-  }));
+  const staticParams: { id: string; current: string }[] = [];
+
+  for (const category of categories) {
+    const { totalCount } = await getNewsList({
+      limit: 1,
+      fields: ["id"],
+      filters: `category[equals]${category.id}`,
+    });
+
+    const pageCount = Math.ceil(totalCount / NEWS_LIST_LIMIT);
+
+    for (let page = 2; page <= pageCount; page++) {
+      staticParams.push({
+        id: category.id,
+        current: String(page),
+      });
+    }
+  }
+
+  return staticParams;
 }
 
 export default async function Page({ params }: Props) {
+  const { current } = await params;
   const { id } = await params;
+
+  const currentPage = parseInt(current, 10);
+
+  if (Number.isNaN(currentPage) || currentPage < 1) {
+    notFound();
+  }
 
   const category = await getCategoryDetail(id).catch(() => notFound());
 
   const { contents: news, totalCount } = await getNewsList({
-    limit: NEWS_LIST_LIMIT,
     filters: `category[equals]${category.id}`,
+    limit: NEWS_LIST_LIMIT,
+    offset: NEWS_LIST_LIMIT * (currentPage - 1),
   });
+
+  if (news.length === 0) {
+    notFound();
+  }
 
   return (
     <>
@@ -47,6 +77,7 @@ export default async function Page({ params }: Props) {
       <NewsList news={news} />
       <Pagination
         totalCount={totalCount}
+        current={currentPage}
         basePath={`/news/category/${category.id}`}
       />
     </>
