@@ -7,9 +7,7 @@ import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    "https://sample-site1-yoku-matsudas-projects.vercel.app",
-  ),
+  metadataBase: new URL("https://sample-site1-woad.vercel.app"),
   title: {
     template: "%s | Yoku Web Design",
     default: "Yoku Web Design",

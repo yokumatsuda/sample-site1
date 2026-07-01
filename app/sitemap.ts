@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 import { getAllCategoryList, getAllNewsList } from "./_libs/microcms";
 
 const buildUrl = (path?: string) =>
-  `https://sample-site1-yoku-matsudas-projects.vercel.app/${path ?? ""}`;
+  `https://sample-site1-woad.vercel.app/${path ?? ""}`;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const newsContents = await getAllNewsList();
