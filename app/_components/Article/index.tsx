@@ -62,7 +62,7 @@ export default function Article({ data }: Props) {
       };
 
   return (
-    <main>
+    <article>
       <h1 className={styles.title}>{data.title}</h1>
       <p className={styles.description}>{data.description}</p>
       <div className={styles.meta}>
@@ -87,6 +87,6 @@ export default function Article({ data }: Props) {
         // dangerouslySetInnerHTML={{ __html: data.content }}
         dangerouslySetInnerHTML={{ __html: sanitizedContent }}
       ></div>
-    </main>
+    </article>
   );
 }
