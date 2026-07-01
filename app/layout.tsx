@@ -8,6 +8,9 @@ import Footer from "./_components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sample-site1-woad.vercel.app"),
+  verification: {
+    google: "rW9tRWfPprDcUQ6MM5i5CZ9wyXlWthyziR1bqJp98w8",
+  },
   title: {
     template: "%s | Yoku Web Design",
     default: "Yoku Web Design",
