@@ -31,6 +31,7 @@ export default function NewsList({ news }: Props) {
                 className="h-auto w-[200px] rounded-[var(--border-radius)] max-sm:hidden"
                 width={article.thumbnail.width}
                 height={article.thumbnail.height}
+                sizes="200px"
               />
             ) : (
               <Image
@@ -39,6 +40,7 @@ export default function NewsList({ news }: Props) {
                 alt="No Image"
                 width={1200}
                 height={630}
+                sizes="200px"
               />
             )}
 

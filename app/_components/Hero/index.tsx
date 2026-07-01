@@ -24,6 +24,7 @@ export default function Hero({ title, sub }: Props) {
         alt=""
         width={4000}
         height={1200}
+        sizes="100vw"
       />
     </section>
   );

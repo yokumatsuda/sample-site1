@@ -81,7 +81,8 @@ export default function Article({ data }: Props) {
         className={styles.thumbnail}
         width={thumbnail.width}
         height={thumbnail.height}
-      />{" "}
+        sizes="(max-width: 640px) calc(100vw - 80px), 680px"
+      />
       <div
         className={styles.content}
         // dangerouslySetInnerHTML={{ __html: data.content }}
