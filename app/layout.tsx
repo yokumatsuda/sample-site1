@@ -8,6 +8,7 @@ import Footer from "./_components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sample-site1-woad.vercel.app"),
+  // Google Search Console登録
   verification: {
     google: "rW9tRWfPprDcUQ6MM5i5CZ9wyXlWthyziR1bqJp98w8",
   },
