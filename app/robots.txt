@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://sample-site1-yoku-matsudas-projects.vercel.app/
+Sitemap: https://sample-site1-yoku-matsudas-projects.vercel.app/sitemap.xml
