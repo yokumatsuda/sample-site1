@@ -1,6 +1,7 @@
 // app\_components\ContactForm\index.tsx
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import {
   createContactData,
   type ContactActionState,
@@ -18,6 +19,15 @@ export default function ContactForm() {
     initialState,
   );
 
+  // GA4用関数
+  const handleSubmit = () => {
+    sendGAEvent({ event: "contact", value: "submit" });
+  };
+  // GoogleTagManager(GTM)用関数
+  // const handleSubmit = () => {
+  //   sendGTMEvent({ event: "contact", value: "submit" });
+  // };
+
   if (state.status === "success") {
     return (
       <p className="rounded-[var(--border-radius)] bg-[var(--color-bg-sub)] p-10 text-center max-sm:text-left">
@@ -29,7 +39,11 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="mx-auto max-w-[600px]" action={formAction}>
+    <form
+      className="mx-auto max-w-[600px]"
+      action={formAction}
+      onSubmit={handleSubmit}
+    >
       <div className="flex w-full items-center justify-start gap-6">
         <div className="flex flex-1 flex-col py-2">
           <label className="text-sm" htmlFor="lastname">
