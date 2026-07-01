@@ -1,9 +1,34 @@
 // app/page.tsx
+import type { Metadata } from "next";
 import Image from "next/image";
 import { getNewsList } from "./_libs/microcms";
 import { TOP_NEWS_LIMIT } from "./_constants";
 import NewsList from "./_components/NewsList";
 import ButtonLink from "./_components/ButtonLink";
+
+export const metadata: Metadata = {
+  title: "トップページ",
+  description:
+    "Yoku Web Designのトップページです。Next.js、TypeScript、microCMSを活用したWeb制作・Webアプリ開発の情報を掲載しています。",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Yoku Web Design",
+    description:
+      "Next.js、TypeScript、microCMSを活用したWeb制作・Webアプリ開発のポートフォリオサイトです。",
+    url: "/",
+    type: "website",
+    images: [
+      {
+        url: "/ogp.png",
+        width: 1200,
+        height: 630,
+        alt: "Yoku Web Design",
+      },
+    ],
+  },
+};
 
 export const revalidate = 1;
 

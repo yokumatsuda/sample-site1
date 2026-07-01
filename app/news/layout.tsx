@@ -1,8 +1,9 @@
 // app\news\layout.tsx
+import type { Metadata } from "next";
 import Hero from "../_components/Hero";
 import Sheet from "../_components/Sheet";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "ニュース",
 };
 

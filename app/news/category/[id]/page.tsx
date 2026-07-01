@@ -1,4 +1,5 @@
 // app\news\category\[id]\page.tsx
+import type { Metadata } from "next";
 import {
   getCategoryDetail,
   getCategoryList,
@@ -16,6 +17,33 @@ type Props = {
     id: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const category = await getCategoryDetail(id).catch(() => notFound());
+
+  return {
+    title: `${category.name}の記事一覧`,
+    description: `${category.name}に関するニュース・制作事例の一覧です。`,
+    alternates: {
+      canonical: `/news/category/${category.id}`,
+    },
+    openGraph: {
+      title: `${category.name}の記事一覧 | Yoku Web Design`,
+      description: `${category.name}に関するニュース・制作事例の一覧です。`,
+      url: `/news/category/${category.id}`,
+      type: "website",
+      images: [
+        {
+          url: "/ogp.png",
+          width: 1200,
+          height: 630,
+          alt: `${category.name}の記事一覧 | Yoku Web Design`,
+        },
+      ],
+    },
+  };
+}
 
 export const revalidate = 1;
 

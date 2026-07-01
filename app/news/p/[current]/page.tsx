@@ -1,4 +1,5 @@
 // app\news\p\[current]\page.tsx
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getNewsList } from "@/app/_libs/microcms";
 import NewsList from "@/app/_components/NewsList";
@@ -12,6 +13,28 @@ type Props = {
     current: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { current } = await params;
+
+  return {
+    title: `ニュース一覧 ${current}ページ目`,
+    description: `Yoku Web Designのニュース一覧、${current}ページ目です。`,
+    alternates: {
+      canonical: `/news/p/${current}`,
+    },
+    robots: {
+      index: false,
+      follow: true,
+    },
+    openGraph: {
+      title: `ニュース一覧 ${current}ページ目 | Yoku Web Design`,
+      description: `Yoku Web Designのニュース一覧、${current}ページ目です。`,
+      url: `/news/p/${current}`,
+      type: "website",
+    },
+  };
+}
 
 export const revalidate = 1;
 

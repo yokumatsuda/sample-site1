@@ -1,7 +1,7 @@
 // app\news\preview\[slug]\page.tsx
 // これはmicroCMS画面プレビュー用のプログラムです。
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { getNewsDetail } from "@/app/_libs/microcms";
 import Article from "@/app/_components/Article";
 import ButtonLink from "@/app/_components/ButtonLink";
@@ -18,6 +18,8 @@ type Props = {
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  title: "記事プレビュー",
+  description: "microCMSの記事プレビューページです。",
   robots: {
     index: false,
     follow: false,

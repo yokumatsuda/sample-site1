@@ -1,4 +1,5 @@
 // app\news\search\page.tsx
+import type { Metadata } from "next";
 import { getNewsList } from "@/app/_libs/microcms";
 import { NEWS_LIST_LIMIT } from "@/app/_constants";
 import NewsList from "@/app/_components/NewsList";
@@ -13,6 +14,35 @@ type Props = {
     page?: string;
   }>;
 };
+
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const { q, category } = await searchParams;
+
+  const title = q ? `「${q}」の検索結果` : "ニュース検索";
+
+  return {
+    title,
+    description:
+      "Yoku Web Designのニュース記事をキーワードやカテゴリで検索できます。",
+    robots: {
+      index: false,
+      follow: true,
+    },
+    openGraph: {
+      title: `${title} | Yoku Web Design`,
+      description:
+        "Yoku Web Designのニュース記事をキーワードやカテゴリで検索できます。",
+      url: category
+        ? `/news/search?q=${encodeURIComponent(q ?? "")}&category=${encodeURIComponent(category)}`
+        : q
+          ? `/news/search?q=${encodeURIComponent(q)}`
+          : "/news/search",
+      type: "website",
+    },
+  };
+}
 
 export const dynamic = "force-dynamic";
 
