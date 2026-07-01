@@ -7,6 +7,8 @@ import SearchField from "../_components/SearchField";
 import CategoryFilter from "../_components/CategoryFilter";
 import Pagination from "../_components/Pagination";
 
+export const revalidate = 1;
+
 export const metadata: Metadata = {
   title: "ニュース",
   description:
@@ -30,8 +32,6 @@ export const metadata: Metadata = {
     ],
   },
 };
-
-export const revalidate = 1;
 
 export default async function Page() {
   const { contents: news, totalCount } = await getNewsList({

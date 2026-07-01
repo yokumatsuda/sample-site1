@@ -65,6 +65,7 @@ export default function Article({ data }: Props) {
     <article>
       <h1 className={styles.title}>{data.title}</h1>
       <p className={styles.description}>{data.description}</p>
+
       <div className={styles.meta}>
         <Link
           href={`/news/category/${data.category.id}`}
@@ -75,6 +76,7 @@ export default function Article({ data }: Props) {
 
         <Date date={data.publishedAt || data.createdAt} />
       </div>
+
       <Image
         src={thumbnail.src}
         alt=""

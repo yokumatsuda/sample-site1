@@ -15,6 +15,8 @@ type Props = {
   }>;
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   searchParams,
 }: Props): Promise<Metadata> {
@@ -43,8 +45,6 @@ export async function generateMetadata({
     },
   };
 }
-
-export const dynamic = "force-dynamic";
 
 export default async function Page({ searchParams }: Props) {
   const { q, category, page } = await searchParams;

@@ -14,6 +14,8 @@ type Props = {
   }>;
 };
 
+export const revalidate = 1;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { current } = await params;
 
@@ -35,8 +37,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-
-export const revalidate = 1;
 
 export async function generateStaticParams() {
   const { totalCount } = await getNewsList({

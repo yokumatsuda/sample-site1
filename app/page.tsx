@@ -6,6 +6,8 @@ import { TOP_NEWS_LIMIT } from "./_constants";
 import NewsList from "./_components/NewsList";
 import ButtonLink from "./_components/ButtonLink";
 
+export const revalidate = 1;
+
 export const metadata: Metadata = {
   title: "トップページ",
   description:
@@ -29,8 +31,6 @@ export const metadata: Metadata = {
     ],
   },
 };
-
-export const revalidate = 1;
 
 export default async function Home() {
   const data = await getNewsList({

@@ -19,6 +19,8 @@ type Props = {
   }>;
 };
 
+export const revalidate = 1;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id, current } = await params;
   const category = await getCategoryDetail(id).catch(() => notFound());
@@ -41,8 +43,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-
-export const revalidate = 1;
 
 export async function generateStaticParams() {
   const { contents: categories } = await getCategoryList({
